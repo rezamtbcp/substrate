@@ -1,22 +1,35 @@
 name: Build and Test
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
-
-env:
-  CARGO_TERM_COLOR: always
+    branches:
+    - master
+  push:
+    branches:
+    - master
 
 jobs:
   build:
-
-    runs-on: ubuntu-18.04-substrate
-
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose
+    - name: Cache cargo
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo
+    - name: Install toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: nightly-2020-10-06
+        target: wasm32-unknown-unknown
+        override: true
+        default: true
+    - name: Install Wasm toolchain
+      run: rustup target add wasm32-unknown-unknown
     - name: Run tests
-      run: cargo test --verbose
+      run: make test
