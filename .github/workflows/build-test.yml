@@ -26,8 +26,8 @@ jobs:
 
       - name: Checkout master
         uses: actions/checkout@v2
-      - name: Run init.sh script
-        run: ./scripts/init.sh
+#       - name: Run init.sh script
+#         run: ./scripts/init.sh
       - name: Build
         run: cargo +nightly-2020-10-05 build --release
       - name: Upload artifact
@@ -56,8 +56,8 @@ jobs:
 
       - name: Checkout master
         uses: actions/checkout@v2
-      - name: Run init.sh script
-        run: ./scripts/init.sh
+#       - name: Run init.sh script
+#         run: ./scripts/init.sh
       - name: Build
         run: cargo +nightly-2020-10-05 build --release
       - name: Upload artifact
@@ -86,8 +86,8 @@ jobs:
 
       - name: Checkout master
         uses: actions/checkout@v2
-      - name: Run init.sh script
-        run: ./scripts/init.sh
+#       - name: Run init.sh script
+#         run: ./scripts/init.sh
       - name: Build
         run: cargo +nightly-2020-10-05 build --release
       - name: Upload artifact
